@@ -110,19 +110,19 @@ export default function RecipeDetail() {
       </div>
 
       {/* Header */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">{recipe.name}</h1>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{recipe.name}</h1>
         {recipe.description && (
-          <p className="text-gray-500 mb-4">{recipe.description}</p>
+          <p className="text-gray-500 dark:text-gray-400 mb-4">{recipe.description}</p>
         )}
 
-        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-4">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
           {totalTime > 0 && (
             <span className="flex items-center gap-1">
               <Clock size={15} />
               {totalTime} min
               {recipe.prepTime > 0 && recipe.cookTime > 0 && (
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-gray-400 dark:text-gray-500">
                   ({recipe.prepTime} prep + {recipe.cookTime} cook)
                 </span>
               )}
@@ -137,12 +137,12 @@ export default function RecipeDetail() {
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
           {recipe.mealTypes.map((type) => (
-            <span key={type} className="px-2.5 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-medium">
+            <span key={type} className="px-2.5 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 rounded-full text-xs font-medium">
               {MEAL_TYPE_LABELS[type]}
             </span>
           ))}
           {recipe.tags.map((tag) => (
-            <span key={tag} className="px-2.5 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">
+            <span key={tag} className="px-2.5 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full text-xs">
               {tag}
             </span>
           ))}
@@ -153,18 +153,18 @@ export default function RecipeDetail() {
       </div>
 
       {/* Ingredients */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Ingredients</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Ingredients</h2>
         <ul className="space-y-2">
           {recipe.ingredients.map((ing, i) => (
-            <li key={i} className="flex items-center justify-between py-1.5 border-b border-gray-50 last:border-0">
-              <span className="text-sm text-gray-800">
+            <li key={i} className="flex items-center justify-between py-1.5 border-b border-gray-50 dark:border-gray-700 last:border-0">
+              <span className="text-sm text-gray-800 dark:text-gray-200">
                 {ing.quantity} {ing.unit} {ing.name}
                 {ing.notes && (
-                  <span className="text-gray-400 ml-1">({ing.notes})</span>
+                  <span className="text-gray-400 dark:text-gray-500 ml-1">({ing.notes})</span>
                 )}
               </span>
-              <span className="text-xs text-gray-400">
+              <span className="text-xs text-gray-400 dark:text-gray-500">
                 {GROCERY_CATEGORY_LABELS[ing.category]}
               </span>
             </li>
@@ -174,15 +174,15 @@ export default function RecipeDetail() {
 
       {/* Instructions */}
       {recipe.instructions.length > 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Instructions</h2>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Instructions</h2>
           <ol className="space-y-3">
             {recipe.instructions.map((step, i) => (
               <li key={i} className="flex gap-3">
-                <span className="flex-shrink-0 w-7 h-7 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center text-xs font-semibold">
+                <span className="flex-shrink-0 w-7 h-7 bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-400 rounded-full flex items-center justify-center text-xs font-semibold">
                   {i + 1}
                 </span>
-                <p className="text-sm text-gray-700 pt-1">{step}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 pt-1">{step}</p>
               </li>
             ))}
           </ol>

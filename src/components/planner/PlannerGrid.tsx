@@ -32,7 +32,7 @@ export default function PlannerGrid({
           {DAYS_OF_WEEK.map((day) => (
             <div
               key={day}
-              className="text-center text-sm font-semibold text-gray-700 py-2"
+              className="text-center text-sm font-semibold text-gray-700 dark:text-gray-300 py-2"
             >
               {formatDayShort(monday, day)}
             </div>
@@ -46,7 +46,7 @@ export default function PlannerGrid({
             className="grid grid-cols-[100px_repeat(7,1fr)] gap-2 mb-2"
           >
             {/* Row label */}
-            <div className="flex items-center justify-end pr-3 text-sm font-medium text-gray-500">
+            <div className="flex items-center justify-end pr-3 text-sm font-medium text-gray-500 dark:text-gray-400">
               {MEAL_TYPE_LABELS[mealType]}
             </div>
 

@@ -60,6 +60,15 @@ export function useMealPlan(weekStartDate: string) {
     return mealPlan?.meals.find((m) => m.day === day && m.mealType === mealType);
   };
 
+  const clearWeek = async () => {
+    try {
+      const result = await mealPlansApi.clearWeek(weekStartDate);
+      setMealPlan(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to clear week');
+    }
+  };
+
   const getPlannedRecipeIds = (): number[] => {
     if (!mealPlan) return [];
     return mealPlan.meals
@@ -73,6 +82,7 @@ export function useMealPlan(weekStartDate: string) {
     error,
     setMeal,
     getMeal,
+    clearWeek,
     getPlannedRecipeIds,
     refresh: fetchPlan,
   };

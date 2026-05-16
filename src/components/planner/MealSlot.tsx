@@ -22,13 +22,13 @@ export default function MealSlot({
 
   if (selectedRecipe) {
     return (
-      <div className="bg-primary-50 border border-primary-200 rounded-lg p-2 min-h-[60px] flex items-center justify-between gap-1 group">
-        <span className="text-xs font-medium text-primary-800 leading-tight line-clamp-2">
+      <div className="bg-primary-50 dark:bg-primary-900/30 border border-primary-200 dark:border-primary-700 rounded-lg p-2 min-h-[60px] flex items-center justify-between gap-1 group">
+        <span className="text-xs font-medium text-primary-800 dark:text-primary-300 leading-tight line-clamp-2">
           {selectedRecipe.name}
         </span>
         <button
           onClick={() => onSelect(day, mealType, null)}
-          className="p-1 rounded text-primary-400 hover:text-red-500 hover:bg-white transition-colors opacity-0 group-hover:opacity-100 shrink-0"
+          className="p-1 rounded text-primary-400 hover:text-red-500 hover:bg-white dark:hover:bg-gray-700 transition-colors opacity-0 group-hover:opacity-100 shrink-0"
           aria-label="Clear meal"
         >
           <X size={14} />
@@ -54,7 +54,7 @@ export default function MealSlot({
           </option>
         ))}
       </select>
-      <div className="border-2 border-dashed border-gray-200 rounded-lg p-2 min-h-[60px] flex items-center justify-center text-gray-400 hover:border-primary-300 hover:text-primary-500 transition-colors cursor-pointer">
+      <div className="border-2 border-dashed border-gray-200 dark:border-gray-600 rounded-lg p-2 min-h-[60px] flex items-center justify-center text-gray-400 dark:text-gray-500 hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-500 transition-colors cursor-pointer">
         <Plus size={16} />
       </div>
     </div>

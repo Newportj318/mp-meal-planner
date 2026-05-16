@@ -1,8 +1,11 @@
 import { Router } from 'express';
 import * as cheerio from 'cheerio';
 import multer from 'multer';
-import * as pdfParseModule from 'pdf-parse';
-const pdfParse = (pdfParseModule as any).default || pdfParseModule;
+import { createRequire } from 'module';
+
+// pdf-parse has ESM compatibility issues — use createRequire for reliable loading
+const require = createRequire(import.meta.url);
+const pdfParse = require('pdf-parse');
 
 const router = Router();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });

@@ -95,4 +95,33 @@ router.put('/:weekStartDate/meals', async (req, res) => {
   }
 });
 
+// DELETE /api/meal-plans/:weekStartDate/clear — clear all meals for a week
+router.delete('/:weekStartDate/clear', async (req, res) => {
+  try {
+    const pool = getPool(req);
+    const current = await pool.query(
+      'SELECT * FROM meal_plans WHERE week_start_date = $1',
+      [req.params.weekStartDate]
+    );
+
+    if (current.rows.length === 0) {
+      return res.json(null);
+    }
+
+    const meals = (current.rows[0].meals as any[]).map((m: any) => ({
+      ...m,
+      recipeId: null,
+    }));
+
+    const result = await pool.query(
+      `UPDATE meal_plans SET meals = $1, updated_at = NOW() WHERE week_start_date = $2 RETURNING *`,
+      [JSON.stringify(meals), req.params.weekStartDate]
+    );
+
+    res.json(toMealPlan(result.rows[0]));
+  } catch (err: any) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 export default router;

@@ -71,6 +71,11 @@ export const mealPlansApi = {
       method: 'PUT',
       body: JSON.stringify(meal),
     }),
+
+  clearWeek: (weekStartDate: string) =>
+    request<MealPlan | null>(`/meal-plans/${weekStartDate}/clear`, {
+      method: 'DELETE',
+    }),
 };
 
 // ==========================================

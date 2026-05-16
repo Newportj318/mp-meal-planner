@@ -56,8 +56,8 @@ export default function Export() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Grocery List</h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Grocery List</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             Auto-generated from your meal plan. Ingredients grouped and aggregated.
           </p>
         </div>

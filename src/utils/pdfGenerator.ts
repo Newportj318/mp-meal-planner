@@ -2,20 +2,49 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import type { GroupedGroceryList } from '../db/models';
 
+function drawLogo(doc: jsPDF, x: number, y: number, size: number) {
+  const r = size / 2;
+  const cx = x + r;
+  const cy = y + r;
+
+  // Outer circle
+  doc.setFillColor(13, 148, 136);
+  doc.circle(cx, cy, r, 'F');
+
+  // Inner circle
+  doc.setFillColor(20, 184, 166);
+  doc.circle(cx, cy, r * 0.82, 'F');
+
+  // Center ring
+  doc.setFillColor(13, 148, 136);
+  doc.setGState(new (doc as any).GState({ opacity: 0.3 }));
+  doc.circle(cx, cy, r * 0.64, 'F');
+  doc.setGState(new (doc as any).GState({ opacity: 1 }));
+
+  // MP text
+  doc.setFontSize(size * 0.42);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(255, 255, 255);
+  doc.text('MP', cx, cy + size * 0.08, { align: 'center' });
+}
+
 export function generateGroceryPdf(
   groceryList: GroupedGroceryList[],
   weekLabel: string
 ): void {
   const doc = new jsPDF();
 
-  // Title
+  // Logo
+  drawLogo(doc, 14, 10, 18);
+
+  // Title (next to logo)
   doc.setFontSize(20);
   doc.setTextColor(15, 118, 110); // primary-700
-  doc.text('Grocery List', 14, 22);
+  doc.text('Grocery List', 36, 22);
 
   doc.setFontSize(12);
   doc.setTextColor(107, 114, 128); // gray-500
-  doc.text(weekLabel, 14, 30);
+  doc.text(weekLabel, 36, 30);
 
   let yPos = 38;
 
