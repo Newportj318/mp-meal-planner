@@ -2,12 +2,11 @@ FROM node:20-slim
 
 WORKDIR /app
 
-# Install dependencies
-COPY package*.json ./
-RUN npm ci
-
-# Copy source
+# Copy all source first (busts cache on any file change)
 COPY . .
+
+# Install dependencies
+RUN npm ci
 
 # Build frontend
 RUN npm run build
