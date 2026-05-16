@@ -1,11 +1,15 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { Pool } from 'pg';
 import recipesRouter from './routes/recipes';
 import mealPlansRouter from './routes/mealPlans';
 import importRouter from './routes/import';
 import { initDb } from './db';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '3001', 10);
