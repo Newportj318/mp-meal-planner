@@ -7,9 +7,10 @@ import MetabolicBadge from './MetabolicBadge';
 interface RecipeCardProps {
   recipe: Recipe;
   onDelete?: (id: number) => void;
+  onTagClick?: (tag: string) => void;
 }
 
-export default function RecipeCard({ recipe, onDelete }: RecipeCardProps) {
+export default function RecipeCard({ recipe, onDelete, onTagClick }: RecipeCardProps) {
   const navigate = useNavigate();
   const totalTime = (recipe.prepTime || 0) + (recipe.cookTime || 0);
 
@@ -50,20 +51,28 @@ export default function RecipeCard({ recipe, onDelete }: RecipeCardProps) {
       {/* Tags */}
       <div className="flex flex-wrap gap-1.5">
         {recipe.mealTypes.map((type) => (
-          <span
+          <button
             key={type}
-            className="inline-block px-2 py-0.5 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 rounded text-xs"
+            onClick={(e) => {
+              e.stopPropagation();
+              onTagClick?.(type.toLowerCase());
+            }}
+            className="inline-block px-2 py-0.5 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 rounded text-xs hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-colors"
           >
             {MEAL_TYPE_LABELS[type]}
-          </span>
+          </button>
         ))}
         {recipe.tags.slice(0, 3).map((tag) => (
-          <span
+          <button
             key={tag}
-            className="inline-block px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded text-xs"
+            onClick={(e) => {
+              e.stopPropagation();
+              onTagClick?.(tag.toLowerCase());
+            }}
+            className="inline-block px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded text-xs hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
           >
             {tag}
-          </span>
+          </button>
         ))}
       </div>
 

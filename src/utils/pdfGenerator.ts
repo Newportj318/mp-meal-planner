@@ -3,29 +3,16 @@ import autoTable from 'jspdf-autotable';
 import type { GroupedGroceryList } from '../db/models';
 
 function drawLogo(doc: jsPDF, x: number, y: number, size: number) {
-  const r = size / 2;
-  const cx = x + r;
-  const cy = y + r;
-
-  // Outer circle
+  // Rounded square background
+  const r = size * 0.25; // corner radius
   doc.setFillColor(13, 148, 136);
-  doc.circle(cx, cy, r, 'F');
+  doc.roundedRect(x, y, size, size, r, r, 'F');
 
-  // Inner circle
-  doc.setFillColor(20, 184, 166);
-  doc.circle(cx, cy, r * 0.82, 'F');
-
-  // Center ring
-  doc.setFillColor(13, 148, 136);
-  doc.setGState(new (doc as any).GState({ opacity: 0.3 }));
-  doc.circle(cx, cy, r * 0.64, 'F');
-  doc.setGState(new (doc as any).GState({ opacity: 1 }));
-
-  // MP text
-  doc.setFontSize(size * 0.42);
+  // MP text centered
+  doc.setFontSize(size * 0.45);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(255, 255, 255);
-  doc.text('MP', cx, cy + size * 0.08, { align: 'center' });
+  doc.text('MP', x + size / 2, y + size * 0.62, { align: 'center' });
 }
 
 export function generateGroceryPdf(

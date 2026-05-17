@@ -111,22 +111,23 @@ export default function Recipes() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Recipes</h1>
-          <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">Recipes</h1>
+          <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm mt-0.5">
             {recipes.length} recipe{recipes.length !== 1 ? 's' : ''} in your database
           </p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
+          className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors"
         >
           <Plus size={18} />
-          Add Recipe
+          <span className="hidden sm:inline">Add Recipe</span>
+          <span className="sm:hidden">Add</span>
         </button>
       </div>
 
       {/* Search + Tag Filter */}
-      <div className="flex gap-3 items-start">
+      <div className="flex gap-2 sm:gap-3 items-start">
         <div className="relative flex-1">
           <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input
@@ -150,7 +151,7 @@ export default function Recipes() {
         <div className="relative" ref={tagDropdownRef}>
           <button
             onClick={() => setShowTagDropdown(!showTagDropdown)}
-            className={`flex items-center gap-2 px-4 py-2.5 border rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 border rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
               selectedTags.length > 0
                 ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400'
                 : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
@@ -299,6 +300,11 @@ export default function Recipes() {
               key={recipe.id}
               recipe={recipe}
               onDelete={handleDelete}
+              onTagClick={(tag) => {
+                if (!selectedTags.includes(tag)) {
+                  setSelectedTags((prev) => [...prev, tag]);
+                }
+              }}
             />
           ))}
         </div>
